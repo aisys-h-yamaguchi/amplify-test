@@ -10,12 +10,13 @@
     hello amplify
     <script>
       //APIの呼び出しを定義する
-      async function getData() {
-        const res = await fetch(
-          "https://osvrxphpzichi2d42lyqkqm7qa0cnptk.lambda-url.us-east-2.on.aws/"
-        );
-        const users = await res.json();
-        console.log(users);
+      function getData() {
+        fetch("https://osvrxphpzichi2d42lyqkqm7qa0cnptk.lambda-url.us-east-2.on.aws/", {
+          method: "GET",
+          withCredentials: true,
+          crossorigin: true,
+          mode: "no-cors",
+        }).then((response) => console.log(response));
       }
     </script>
   </body>
