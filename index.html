@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Welcome to the Room Escape Game!</title>
-</head>
- 
-<body>
+  </head>
+
+  <body>
+    <button type="button" onclick="callAPI()">APIを呼ぶ</button>
     hello amplify
-</body>
+    <script>
+      //APIの呼び出しを定義する
+      var callAPI = () => {
+        //idは現在の次の段階を代入
+        var id = vm.ID;
+        // ヘッダーオブジェクトの生成
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        //Lambda側に渡す値の設定
+        var raw = JSON.stringify({ ID: id });
+        // JSONオブジェクトの生成
+        var requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+        // API経由でのLambdaからのレスポンスをVueインスタンスに代入する
+        fetch(
+          "https://osvrxphpzichi2d42lyqkqm7qa0cnptk.lambda-url.us-east-2.on.aws/",
+          requestOptions
+        )
+          .then((response) => response.text())
+          .catch((error) => console.log("error", error));
+      };
+    </script>
+  </body>
 </html>
